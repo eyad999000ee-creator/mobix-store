@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mobix | متجر الأجهزة</title>
+<style>
+*{box-sizing:border-box}
+:root{
+  --bg:#030305;--panel:#0a0a10;--panel2:#101018;--text:#f5f7ff;--muted:#a7adc0;
+  --cyan:#00f5ff;--pink:#ff2bd6;--purple:#8b5cff;--lime:#b7ff00;--line:#1c1c2b
+}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Arial,Tahoma,sans-serif;background:
+radial-gradient(circle at 10% 10%,#00f5ff0d,transparent 28%),
+radial-gradient(circle at 90% 20%,#ff2bd60d,transparent 30%),
+var(--bg);color:var(--text)}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(#fff004 1px,transparent 1px),linear-gradient(90deg,#fff003 1px,transparent 1px);background-size:55px 55px;opacity:.025;z-index:-1}
+header{background:#050509eF;color:#fff;position:sticky;top:0;z-index:10;border-bottom:1px solid #00f5ff44;box-shadow:0 0 25px #00f5ff12}
+.nav{max-width:1200px;margin:auto;padding:15px 20px;display:flex;align-items:center;gap:22px}
+.logo{font-size:32px;font-weight:900;color:#fff;white-space:nowrap;text-shadow:0 0 8px var(--cyan),0 0 22px #00f5ff66}
+.logo span{color:var(--cyan)}
+.search{flex:1;background:#0d0d15;border:1px solid #ffffff18;color:#fff;border-radius:12px;padding:13px 16px;font-size:15px;outline:0;box-shadow:inset 0 0 15px #000}
+.search:focus{border-color:var(--cyan);box-shadow:0 0 15px #00f5ff2e}
+.cart{background:linear-gradient(90deg,var(--cyan),var(--purple));border:0;color:#030305;padding:12px 18px;border-radius:10px;font-weight:900;cursor:pointer;box-shadow:0 0 18px #00f5ff55;transition:.2s}
+.cart:hover{transform:translateY(-2px);box-shadow:0 0 28px #00f5ff88}
+.hero{max-width:1200px;margin:30px auto;padding:60px 30px;border:1px solid #00f5ff35;border-radius:24px;color:#fff;position:relative;overflow:hidden;background:linear-gradient(135deg,#07070d,#0a0712);box-shadow:0 0 35px #00f5ff12, inset 0 0 40px #ff2bd608}
+.hero:before,.hero:after{content:"";position:absolute;border-radius:50%;filter:blur(2px);pointer-events:none}
+.hero:before{width:260px;height:260px;background:#00f5ff1a;top:-120px;right:-70px;box-shadow:0 0 80px #00f5ff44}
+.hero:after{width:240px;height:240px;background:#ff2bd61a;bottom:-130px;left:-60px;box-shadow:0 0 80px #ff2bd644}
+.hero h1{font-size:72px;margin:0 0 8px;letter-spacing:3px;text-shadow:0 0 10px var(--cyan),0 0 35px #00f5ff55}
+.hero p{font-size:21px;color:#fff;text-shadow:0 0 12px #ff2bd666}
+.hero button{background:linear-gradient(90deg,var(--pink),var(--purple));color:#fff;border:0;padding:13px 22px;border-radius:10px;font-weight:900;cursor:pointer;box-shadow:0 0 22px #ff2bd655}
+.container{max-width:1200px;margin:30px auto;padding:0 20px}
+.title{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.title h2{margin:0;text-shadow:0 0 12px #00f5ff55}
+.filters button{border:1px solid #ffffff1a;background:#0b0b12;color:#dfe3f0;border-radius:9px;padding:9px 14px;margin-left:6px;cursor:pointer;transition:.2s}
+.filters button:hover{border-color:#ff2bd6;box-shadow:0 0 13px #ff2bd633}
+.filters button.active{background:linear-gradient(90deg,#00f5ff,#8b5cff);color:#030305;border-color:transparent;font-weight:900;box-shadow:0 0 18px #00f5ff55}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.card{background:linear-gradient(145deg,#0b0b12,#090910);border:1px solid #ffffff12;border-radius:17px;padding:15px;box-shadow:0 8px 25px #0008;transition:.25s;position:relative;overflow:hidden}
+.card:before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,#00f5ff08,transparent 45%,#ff2bd608);pointer-events:none}
+.card:hover{transform:translateY(-6px);border-color:#00f5ff66;box-shadow:0 0 28px #00f5ff25,0 15px 35px #000}
+.pic{height:190px;border-radius:12px;background:radial-gradient(circle,#19192a,#07070c);display:flex;align-items:center;justify-content:center;font-size:76px;border:1px solid #ffffff0c;filter:drop-shadow(0 0 12px #00f5ff22)}
+.card h3{margin:14px 0 6px}.brand{color:#00f5ff;font-size:13px;text-shadow:0 0 8px #00f5ff55}.price{font-size:21px;font-weight:900;margin:12px 0;color:#fff;text-shadow:0 0 10px #ff2bd655}.stock{color:var(--lime);font-size:13px;margin-bottom:10px;text-shadow:0 0 8px #b7ff0066}
+.add{width:100%;border:1px solid #00f5ff66;background:linear-gradient(90deg,#071c20,#15102a);color:#fff;padding:11px;border-radius:9px;font-weight:900;cursor:pointer;transition:.2s}
+.add:hover{background:linear-gradient(90deg,var(--cyan),var(--pink));color:#030305;box-shadow:0 0 20px #00f5ff66}
+.info{margin:48px 0;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.info div{background:#090910;border:1px solid #ffffff12;padding:22px;border-radius:15px;text-align:center;box-shadow:0 0 22px #000}
+.info b{display:block;margin-bottom:7px;color:var(--cyan);text-shadow:0 0 10px #00f5ff55}
+.info small{color:#c7ccda}
+footer{background:#050509;color:#bfc5d8;text-align:center;padding:32px;margin-top:50px;border-top:1px solid #ff2bd633;box-shadow:0 -10px 30px #ff2bd608}
+.modal{display:none;position:fixed;inset:0;background:#000c;z-index:20;align-items:center;justify-content:center}.modal.open{display:flex}
+.box{background:#090910;border:1px solid #00f5ff55;box-shadow:0 0 40px #00f5ff22;width:min(520px,92%);border-radius:18px;padding:24px}
+.box h2{margin-top:0;text-shadow:0 0 10px #00f5ff55}.close{float:left;border:0;background:none;color:#fff;font-size:25px;cursor:pointer}
+.item{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #ffffff12}.pickup{background:#07151a;border:1px solid #00f5ff35;border-radius:10px;padding:14px;margin:15px 0;color:#dffeff;box-shadow:0 0 18px #00f5ff12}
+.checkout{width:100%;padding:13px;border:0;background:linear-gradient(90deg,var(--cyan),var(--pink));color:#030305;border-radius:10px;font-weight:900;cursor:pointer;box-shadow:0 0 20px #00f5ff44}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}.hero h1{font-size:52px}}
+@media(max-width:600px){.nav{flex-wrap:wrap}.search{order:3;flex-basis:100%}.grid{grid-template-columns:1fr}.hero{margin:15px 10px;padding:42px 20px}.hero h1{font-size:43px}.info{grid-template-columns:1fr}.nav>div:nth-child(2){font-size:10px!important}}
+.sponsor{
+  font-family:Arial,Tahoma,sans-serif;
+  font-size:22px;
+  font-weight:700;
+  margin:8px 0 0;
+  color:#ffffff;
+  letter-spacing:1px;
+}</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <div class="logo">Mobi<span>x</span></div><div style="font-size:12px;color:#cbd5e1;line-height:1.7">📍 العنوان: محافظة المنوفية، مدينة السادات، سوق المنطقة الأولى، مكتب فيسبوك<br>💬 واتساب: 01032758539 / 01016752742</div>
+    <input id="search" class="search" placeholder="ابحث عن موبايل أو جهاز..." oninput="render()">
+    <button class="cart" onclick="openCart()">🛒 السلة (<span id="count">0</span>)</button>
+  </div>
+</header>
+
+<section class="hero" style="justify-content:center;text-align:center;min-height:300px">
+  <div>
+    <h1 style="font-size:68px;letter-spacing:2px;margin-bottom:8px">Mobi<span style="color:#7fb0ff">x</span></h1>
+    <p class="sponsor">ENG / AHMED HUSSIN</p>
+    <div style="margin-top:22px;font-weight:700;letter-spacing:1px;color:#cfe0ff">موبايلات • إكسسوارات • ثقة</div>
+  </div>
+  
+</section>
+
+<div class="container">
+  <div class="title">
+    <h2 id="products">الموبايلات والإكسسوارات</h2>
+    <div class="filters">
+      <button class="active" onclick="filterCat('الكل',this)">الكل</button>
+      <button onclick="filterCat('موبايلات',this)">موبايلات</button>
+      
+      <button onclick="filterCat('إكسسوارات',this)">إكسسوارات</button>
+    </div>
+  </div>
+  <div id="grid" class="grid"></div>
+
+  <div class="info">
+    <div>💰<b>دفع عربون</b><small>يتم دفع عربون عند حجز المنتج</small></div>
+    <div>🏪<b>الاستلام في المحل</b><small>استلام الطلب من المتجر</small></div>
+    <div>💬<b>التواصل واتساب</b><small>01032758539<br>01016752742</small></div>
+  </div>
+</div>
+
+<footer>© 2026 Mobix — موبايلات وإكسسوارات<br>📍 العنوان: محافظة المنوفية، مدينة السادات، سوق المنطقة الأولى، مكتب فيسبوك<br>💬 واتساب: 01032758539 / 01016752742</footer>
+
+<div id="modal" class="modal" onclick="if(event.target===this)closeCart()">
+ <div class="box">
+  <button class="close" onclick="closeCart()">×</button>
+  <h2>سلة Mobix</h2>
+  <div id="cartItems"></div>
+  <div id="cartTotal" style="font-size:20px;font-weight:900;margin:16px 0;color:#00f5ff"></div>
+  <div class="pickup"><b>💰 دفع عربون عند الحجز</b><br>يتم دفع عربون عند حجز المنتج، ثم الاستلام من المحل.<br>📍 العنوان: محافظة المنوفية، مدينة السادات، سوق المنطقة الأولى، مكتب فيسبوك.<br>💬 واتساب: 01032758539 / 01016752742</div>
+  <div style="display:grid;gap:10px;margin-bottom:12px">
+    <input id="customerName" class="search" style="width:100%;color:#fff" placeholder="اسم العميل">
+    <input id="customerPhone" class="search" style="width:100%;color:#fff" placeholder="رقم الهاتف">
+  </div>
+  <button class="checkout" onclick="reserve()">✅ تأكيد الطلب والحجز</button>
+ </div>
+</div>
+
+<script>
+const products=[
+ {id:1,name:"iPhone 15",brand:"Apple",price:45999,cat:"موبايلات",icon:"📱"},
+ {id:2,name:"iPhone 15 Pro",brand:"Apple",price:59999,cat:"موبايلات",icon:"📱"},
+ {id:3,name:"Galaxy S24",brand:"Samsung",price:38999,cat:"موبايلات",icon:"📱"},
+ {id:4,name:"Galaxy A55",brand:"Samsung",price:18999,cat:"موبايلات",icon:"📱"},
+ {id:5,name:"Redmi Note 14",brand:"Xiaomi",price:11999,cat:"موبايلات",icon:"📱"},
+ {id:6,name:"Realme 13",brand:"Realme",price:13999,cat:"موبايلات",icon:"📱"},
+ {id:7,name:"AirPods Pro",brand:"Apple",price:8999,cat:"إكسسوارات",icon:"🎧"},
+ {id:8,name:"شاحن سريع 65W",brand:"Anker",price:1899,cat:"إكسسوارات",icon:"🔌"},
+ {id:9,name:"كابل Type-C",brand:"Baseus",price:499,cat:"إكسسوارات",icon:"🔗"},
+ {id:10,name:"جراب حماية",brand:"Mobix",price:299,cat:"إكسسوارات",icon:"📱"},
+ {id:11,name:"حماية شاشة",brand:"Mobix",price:199,cat:"إكسسوارات",icon:"🛡️"},
+ {id:12,name:"ساعة ذكية",brand:"Mobix",price:2499,cat:"إكسسوارات",icon:"⌚"}
+];
+let cart=[],cat="الكل";
+let productDetails={
+  1:"iPhone 15 — شاشة ممتازة، أداء قوي، متوفر بأكثر من لون.",
+  2:"iPhone 15 Pro — تصميم فاخر، كاميرا احترافية، أداء قوي.",
+  3:"Galaxy S24 — شاشة Dynamic AMOLED وكاميرات عالية الجودة.",
+  4:"Galaxy A55 — بطارية قوية وشاشة Super AMOLED.",
+  5:"Redmi Note 14 — أداء ممتاز وسعر مناسب.",
+  6:"Realme 13 — تصميم عصري وأداء سريع.",
+  7:"AirPods Pro — صوت عالي الجودة وعزل ضوضاء.",
+  8:"شاحن سريع 65W — شحن سريع وآمن.",
+  9:"كابل Type-C — خامة قوية وشحن سريع.",
+  10:"جراب حماية — حماية ممتازة وتصميم أنيق.",
+  11:"حماية شاشة — حماية من الخدوش والصدمات.",
+  12:"ساعة ذكية — متابعة النشاط وإشعارات الهاتف."
+};
+const ADMIN_PASSWORD="mobix2026";
+
+function money(n){return n.toLocaleString("ar-EG")+" ج.م"}
+
+function render(){
+ const q=document.getElementById("search").value.toLowerCase();
+ const list=products.filter(p=>(cat==="الكل"||p.cat===cat)&&(p.name.toLowerCase().includes(q)||p.brand.toLowerCase().includes(q)));
+ document.getElementById("grid").innerHTML=list.map(p=>`
+ <article class="card">
+  <div class="pic">${p.icon}</div>
+  <div class="brand">${p.brand}</div>
+  <h3>${p.name}</h3>
+  <div class="stock">● متوفر في المحل</div>
+  <div class="price">${money(p.price)}</div>
+  <div style="display:flex;gap:8px">
+   <button class="add" style="flex:1" onclick="add(${p.id})">🛒 إضافة للسلة</button>
+   <button class="add" style="flex:1;background:#10101a;border-color:#ff2bd666" onclick="showDetails(${p.id})">👁️ عرض التفاصيل</button>
+  </div>
+ </article>`).join("");
+}
+
+function filterCat(c,b){
+ cat=c;
+ document.querySelectorAll(".filters button").forEach(x=>x.classList.remove("active"));
+ b.classList.add("active");
+ render();
+}
+
+function add(id){
+ const p=products.find(x=>x.id===id);
+ if(p) cart.push(p);
+ updateCount();
+ renderCart();
+ openCart();
+}
+
+function removeFromCart(index){
+ cart.splice(index,1);
+ updateCount();
+ renderCart();
+}
+
+function updateCount(){
+ document.getElementById("count").textContent=cart.length;
+}
+
+function renderCart(){
+ const el=document.getElementById("cartItems");
+ const totalEl=document.getElementById("cartTotal");
+ if(!cart.length){
+   el.innerHTML='<div style="padding:25px;text-align:center;color:#a7adc0">🛒 السلة فارغة — أضف منتجًا من المتجر.</div>';
+   totalEl.textContent="";
+   return;
+ }
+ el.innerHTML=cart.map((p,i)=>`
+   <div class="item">
+    <span>${p.icon} ${p.name}</span>
+    <span><b>${money(p.price)}</b> <button onclick="removeFromCart(${i})" style="border:0;background:none;color:#ff4adf;cursor:pointer">حذف</button></span>
+   </div>`).join("");
+ const total=cart.reduce((sum,p)=>sum+p.price,0);
+ totalEl.textContent="إجمالي المنتجات: "+money(total);
+}
+
+function openCart(){
+ document.getElementById("modal").classList.add("open");
+ renderCart();
+}
+
+function closeCart(){document.getElementById("modal").classList.remove("open")}
+
+function showDetails(id){
+ const p=products.find(x=>x.id===id);
+ document.getElementById("detailsContent").innerHTML=`
+  <div style="text-align:center">
+   <div style="font-size:80px">${p.icon}</div>
+   <div class="brand">${p.brand}</div>
+   <h2>${p.name}</h2>
+   <div class="price">${money(p.price)}</div>
+   <p style="color:#c7ccda;line-height:1.8">${productDetails[p.id]||"لا توجد تفاصيل إضافية حاليًا."}</p>
+   <button class="add" style="margin-top:10px" onclick="add(${p.id});closeDetails()">🛒 إضافة للسلة</button>
+   <button class="add" style="margin-top:10px;background:#10101a;border-color:#ff2bd666" onclick="openAdmin(${p.id})">🔐 تعديل التفاصيل (الإدارة)</button>
+  </div>`;
+ document.getElementById("detailsModal").classList.add("open");
+}
+
+function closeDetails(){document.getElementById("detailsModal").classList.remove("open")}
+
+function openAdmin(id){
+ document.getElementById("adminProductId").value=id;
+ document.getElementById("adminDetails").value=productDetails[id]||"";
+ document.getElementById("adminPassword").value="";
+ document.getElementById("adminModal").classList.add("open");
+}
+
+function closeAdmin(){document.getElementById("adminModal").classList.remove("open")}
+
+function saveDetails(){
+ const pass=document.getElementById("adminPassword").value;
+ const id=Number(document.getElementById("adminProductId").value);
+ if(pass!==ADMIN_PASSWORD){alert("كلمة مرور الإدارة غير صحيحة.");return}
+ productDetails[id]=document.getElementById("adminDetails").value.trim();
+ closeAdmin();
+ showDetails(id);
+ alert("تم حفظ التفاصيل.");
+}
+
+function reserve(){
+ if(!cart.length){alert("أضف منتجًا للسلة أولًا.");return}
+ const name=document.getElementById("customerName").value.trim();
+ const phone=document.getElementById("customerPhone").value.trim();
+ if(!name||!phone){alert("من فضلك اكتب اسم العميل ورقم الهاتف.");return}
+ const total=cart.reduce((sum,p)=>sum+p.price,0);
+ const items=cart.map(p=>p.name).join("، ");
+ alert("تم تأكيد الطلب بنجاح!\\n\\nالعميل: "+name+"\\nالهاتف: "+phone+"\\nالمنتجات: "+items+"\\nالإجمالي: "+money(total)+"\\n\\nيتم دفع العربون عند الحجز ثم الاستلام من المحل.");
+ cart=[];
+ updateCount();
+ renderCart();
+ closeCart();
+}
+
+updateCount();
+renderCart();
+render();
+</script>
+
+<div id="detailsModal" class="modal" onclick="if(event.target===this)closeDetails()">
+ <div class="box">
+  <button class="close" onclick="closeDetails()">×</button>
+  <div id="detailsContent"></div>
+ </div>
+</div>
+
+<div id="adminModal" class="modal" onclick="if(event.target===this)closeAdmin()">
+ <div class="box">
+  <button class="close" onclick="closeAdmin()">×</button>
+  <h2>🔐 تعديل تفاصيل المنتج</h2>
+  <p style="color:#a7adc0">هذه المنطقة مخصصة لإدارة Mobix فقط.</p>
+  <input id="adminPassword" class="search" style="width:100%;margin:8px 0;color:#fff" type="password" placeholder="كلمة مرور الإدارة">
+  <input id="adminProductId" type="hidden">
+  <input id="adminDetails" class="search" style="width:100%;margin:8px 0;color:#fff" placeholder="تفاصيل المنتج">
+  <button class="checkout" onclick="saveDetails()">حفظ التفاصيل</button>
+ </div>
+</div>
+</body>
+</html>
